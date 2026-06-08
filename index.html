@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy – Visa Run</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0D1B2E;
+      --blueprint: #1C5FA8;
+      --amber: #D97706;
+      --ice: #EBF3FD;
+      --text: #1a1a2e;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f8fafc;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    header {
+      background: var(--navy);
+      padding: 24px 24px;
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .logo-text span {
+      color: var(--amber);
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .effective-date {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .intro {
+      background: var(--ice);
+      border-left: 4px solid var(--blueprint);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 48px;
+      font-size: 0.975rem;
+      color: var(--navy);
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--amber);
+      display: inline-block;
+    }
+
+    h3 {
+      font-size: 0.975rem;
+      font-weight: 600;
+      color: var(--blueprint);
+      margin: 20px 0 8px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 8px 0 16px 0;
+    }
+
+    ul li {
+      font-size: 0.95rem;
+      color: #334155;
+      padding: 6px 0 6px 20px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    .contact-box {
+      background: var(--navy);
+      color: white;
+      padding: 28px 32px;
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+
+    .contact-box p {
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .contact-box a {
+      color: var(--amber);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .page-title { font-size: 1.5rem; }
+      .container { padding: 40px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <img src="logo.png" alt="Visa Run" class="logo-mark">
+    <span class="logo-text">Visa <span>Run</span></span>
+  </a>
+</header>
+
+<div class="container">
+
+  <h1 class="page-title">Privacy Policy</h1>
+  <p class="effective-date">Effective Date: June 8, 2026</p>
+
+  <div class="intro">
+    Visa Run is a travel utility app designed to help digital nomads track visa stops and plan international travel. This Privacy Policy explains what information we collect, how we use it, and your rights as a user. By using Visa Run, you agree to the terms described in this policy.
+  </div>
+
+  <div class="section">
+    <h2>1. Information We Collect</h2>
+
+    <h3>1.1 Account Information</h3>
+    <p>When you create an account, we collect:</p>
+    <ul>
+      <li>Email address</li>
+      <li>Password (stored securely via Supabase authentication, never in plain text)</li>
+    </ul>
+
+    <h3>1.2 Travel Data</h3>
+    <p>Visa Run stores the travel information you voluntarily enter, including:</p>
+    <ul>
+      <li>Countries visited</li>
+      <li>Entry and exit dates</li>
+      <li>Visa types and durations</li>
+      <li>Passport details (if added in future versions)</li>
+    </ul>
+    <p>This data is stored securely and used solely to power your visa tracking experience.</p>
+
+    <h3>1.3 Device and Notification Data</h3>
+    <p>To deliver push notifications for visa expiry reminders, we collect:</p>
+    <ul>
+      <li>Push notification tokens</li>
+      <li>Device type and operating system version</li>
+      <li>App version</li>
+    </ul>
+
+    <h3>1.4 Usage and Analytics Data</h3>
+    <p>We may collect anonymized data about how you interact with the app, including:</p>
+    <ul>
+      <li>Features accessed</li>
+      <li>Session duration</li>
+      <li>Crash reports and error logs</li>
+    </ul>
+    <p>This data helps us improve the app. It is not linked to your identity.</p>
+
+    <h3>1.5 Payment Information</h3>
+    <p>Visa Run offers paid tiers (Sprint and Marathon) processed entirely through the Apple App Store. We do not collect, store, or have access to your payment card details. All transactions are governed by Apple's privacy policy.</p>
+
+    <h3>1.6 Location Data</h3>
+    <p>The current version of Visa Run does not access your device's GPS or location services. Future versions may offer optional location-based features such as automatic country detection. If introduced, this will be opt-in only and clearly disclosed.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>2. How We Use Your Information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Create and manage your account</li>
+      <li>Store and display your travel history and visa data</li>
+      <li>Send push notifications for visa expiry reminders (only if you enable them)</li>
+      <li>Improve app performance and fix bugs</li>
+      <li>Respond to support requests</li>
+    </ul>
+    <p>We do not sell your personal data. We do not use your data for advertising purposes.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>3. Data Storage and Security</h2>
+    <p>Your data is stored securely using Supabase, a cloud database platform with industry-standard encryption in transit and at rest. We implement reasonable technical and organizational measures to protect your information against unauthorized access, loss, or misuse.</p>
+    <p>No system is 100% secure. In the event of a data breach that affects your personal information, we will notify you as required by applicable law.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>4. Data Retention</h2>
+    <p>We retain your account and travel data for as long as your account is active. If you delete your account, your personal data will be permanently removed from our systems within 30 days, except where retention is required by law.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>5. Sharing of Information</h2>
+    <p>We do not sell, rent, or trade your personal information. We may share data only in the following circumstances:</p>
+    <ul>
+      <li>With service providers who help us operate the app (e.g., Supabase for database hosting), who are bound by confidentiality obligations</li>
+      <li>If required by law, regulation, or legal process</li>
+      <li>To protect the rights, property, or safety of Visa Run, our users, or the public</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>6. Your Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+    <ul>
+      <li>Access: request a copy of the data we hold about you</li>
+      <li>Correction: request corrections to inaccurate or incomplete data</li>
+      <li>Deletion: request that we delete your account and associated data</li>
+      <li>Portability: request your data in a machine-readable format</li>
+      <li>Objection: object to certain types of data processing</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at the email address below. We will respond within 30 days.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>7. Children's Privacy</h2>
+    <p>Visa Run is not intended for use by anyone under the age of 13. We do not knowingly collect personal information from children. If we become aware that a child has provided us with personal data, we will delete it promptly.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>8. Third-Party Services</h2>
+    <p>Visa Run integrates with the following third-party services:</p>
+    <ul>
+      <li>Supabase: database and authentication</li>
+      <li>Apple App Store: payment processing and app distribution</li>
+    </ul>
+    <p>These services have their own privacy policies, which we encourage you to review.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>9. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this document and, where appropriate, notify you via the app or email. Continued use of Visa Run after changes are posted constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>10. Contact</h2>
+    <p>If you have questions or concerns about this Privacy Policy or your data, reach out:</p>
+    <div class="contact-box">
+      <p class="contact-label">Get in touch</p>
+      <p><strong style="color:white;">Visa Run</strong></p>
+      <p>Email: <a href="mailto:info@visarun.club">info@visarun.club</a></p>
+      <p>Website: <a href="https://visarun.club" target="_blank">visarun.club</a></p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 Visa Run. All rights reserved.
+</footer>
+
+</body>
+</html>
