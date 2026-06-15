@@ -863,32 +863,33 @@
 
   async function fetchCount() {
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1&select=count`, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1&select=count&apikey=${SUPABASE_ANON}`, {
         headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` }
       });
       const data = await res.json();
-      if (data && data[0]) {
+      if (data && data.length > 0 && data[0].count !== undefined) {
         const count = data[0].count;
         animateCount(0, count);
         setTimeout(() => {
-          barEl.style.width = Math.min((count / CAP) * 100, 100) + '%';
+          if (barEl) barEl.style.width = Math.min((count / CAP) * 100, 100) + '%';
         }, 200);
+      } else {
+        if (counterEl) counterEl.textContent = '35';
       }
     } catch (err) {
-      counterEl.textContent = '35';
+      if (counterEl) counterEl.textContent = '35';
     }
   }
 
   async function incrementCount() {
     try {
-      // Fetch current, then patch +1
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1&select=count`, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1&select=count&apikey=${SUPABASE_ANON}`, {
         headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` }
       });
       const data = await res.json();
-      if (data && data[0]) {
+      if (data && data.length > 0) {
         const newCount = data[0].count + 1;
-        await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1`, {
+        await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1&apikey=${SUPABASE_ANON}`, {
           method: 'PATCH',
           headers: {
             'apikey': SUPABASE_ANON,
@@ -898,13 +899,17 @@
           },
           body: JSON.stringify({ count: newCount })
         });
-        animateCount(data[0].count, newCount);
-        barEl.style.width = Math.min((newCount / CAP) * 100, 100) + '%';
+        if (counterEl) animateCount(data[0].count, newCount);
+        if (barEl) barEl.style.width = Math.min((newCount / CAP) * 100, 100) + '%';
       }
-    } catch (err) { /* silent fail — Formspree still captured the email */ }
+    } catch (err) { /* silent fail */ }
   }
 
-  fetchCount();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fetchCount);
+  } else {
+    fetchCount();
+  }
 
   // ─── CARDS ───
   const cards = [
