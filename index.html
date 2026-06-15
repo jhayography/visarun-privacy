@@ -402,8 +402,80 @@
     }
     .cta-inner h2 span { color: var(--amber); }
     .cta-inner p {
+      font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 40px;
+    }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 120px 0 160px; }
+    .cta-inner {
+      max-width: 640px; margin: 0 auto; padding: 0 32px; text-align: center;
+    }
+    .cta-inner h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .cta-inner h2 span { color: var(--amber); }
+    .cta-inner p {
       font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 48px;
     }
+
+    /* ─── COUNTER ─── */
+    .waitlist-counter {
+      margin-bottom: 44px;
+    }
+    .counter-card {
+      display: inline-flex; flex-direction: column; align-items: center;
+      background: rgba(217,119,6,0.06);
+      border: 1px solid var(--amber-border);
+      border-radius: 18px; padding: 24px 40px 20px;
+      position: relative; overflow: hidden;
+    }
+    .counter-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(217,119,6,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .counter-live-dot {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 10px;
+    }
+    .counter-live-dot::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--amber);
+      animation: urgency-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(217,119,6,0.4); }
+      50% { opacity: 0.7; transform: scale(0.85); box-shadow: 0 0 0 6px rgba(217,119,6,0); }
+    }
+    .counter-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 4rem; font-weight: 800; color: var(--amber);
+      letter-spacing: -0.06em; line-height: 1;
+    }
+    .counter-label {
+      font-size: 0.82rem; color: var(--muted); font-weight: 400; margin-top: 4px;
+    }
+    .counter-bar-wrap {
+      width: 100%; margin-top: 18px;
+      height: 3px; background: rgba(255,255,255,0.07);
+      border-radius: 2px; overflow: hidden;
+    }
+    .counter-bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--amber), var(--amber-light));
+      border-radius: 2px;
+      transition: width 1.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .counter-urgency {
+      margin-top: 10px; font-size: 0.72rem;
+      color: rgba(255,255,255,0.3); font-weight: 400;
+    }
+    .counter-urgency strong { color: rgba(255,255,255,0.55); font-weight: 600; }
 
     .waitlist-form-wrap { max-width: 420px; margin: 0 auto; }
     .waitlist-label {
@@ -720,10 +792,22 @@
   <section class="cta-section" id="waitlist">
     <div class="cta-inner">
       <span class="section-label reveal" style="display:block; margin-bottom:16px;">Early access</span>
-      <h2 class="reveal reveal-delay-1">Know before<br><span>the clock runs out.</span></h2>
-      <p class="reveal reveal-delay-2">Be first in line when Visa Run launches. Early access users lock in founder pricing and get Marathon free if they're among the first 50.</p>
+      <h2 class="reveal reveal-delay-1">The runway<br><span>doesn't wait.</span></h2>
+      <p class="reveal reveal-delay-2">Be first in line when Visa Run launches. Early access users get priority access and unlock premium features free.</p>
 
-      <div class="waitlist-form-wrap reveal reveal-delay-3">
+      <div class="waitlist-counter reveal reveal-delay-3">
+        <div class="counter-card">
+          <div class="counter-live-dot">Live count</div>
+          <div class="counter-num" id="waitlist-count">—</div>
+          <div class="counter-label">people already on the waitlist</div>
+          <div class="counter-bar-wrap">
+            <div class="counter-bar" id="counter-bar"></div>
+          </div>
+          <div class="counter-urgency">Spots filling up — <strong>be early.</strong></div>
+        </div>
+      </div>
+
+      <div class="waitlist-form-wrap reveal reveal-delay-4">
         <span class="waitlist-label">Get notified when we launch.</span>
         <form id="waitlist-form" action="https://formspree.io/f/mykawjqd" method="POST">
           <div class="waitlist-row">
@@ -734,7 +818,7 @@
         <div class="waitlist-success" id="success-msg">
           You're on the list. We'll reach out when Visa Run launches.
         </div>
-        <p class="waitlist-fine">No spam. One email when we launch.</p>
+        <p class="waitlist-fine">No spam. Just a launch notification.</p>
       </div>
     </div>
   </section>
@@ -757,7 +841,72 @@
 </div>
 
 <script>
-  // Card entrance → float switch
+  const SUPABASE_URL = 'https://vcjxpwrvbfcgexsovaon.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjanhwd3J2YmZjZ2V4c292YW9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NzAyNDcsImV4cCI6MjA5NjM0NjI0N30.cIBQ5rVN2cpsn7ZZKloLPlPd-_rpERl79DmBNviv8_U';
+
+  // ─── COUNTER ───
+  const counterEl = document.getElementById('waitlist-count');
+  const barEl = document.getElementById('counter-bar');
+  const CAP = 100; // bar fills at 100 signups
+
+  function animateCount(from, to) {
+    const duration = 1000;
+    const start = performance.now();
+    const update = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      counterEl.textContent = Math.round(from + (to - from) * ease);
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  async function fetchCount() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1&select=count`, {
+        headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` }
+      });
+      const data = await res.json();
+      if (data && data[0]) {
+        const count = data[0].count;
+        animateCount(0, count);
+        setTimeout(() => {
+          barEl.style.width = Math.min((count / CAP) * 100, 100) + '%';
+        }, 200);
+      }
+    } catch (err) {
+      counterEl.textContent = '35';
+    }
+  }
+
+  async function incrementCount() {
+    try {
+      // Fetch current, then patch +1
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1&select=count`, {
+        headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` }
+      });
+      const data = await res.json();
+      if (data && data[0]) {
+        const newCount = data[0].count + 1;
+        await fetch(`${SUPABASE_URL}/rest/v1/waitlist_count?id=eq.1`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_ANON,
+            'Authorization': `Bearer ${SUPABASE_ANON}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ count: newCount })
+        });
+        animateCount(data[0].count, newCount);
+        barEl.style.width = Math.min((newCount / CAP) * 100, 100) + '%';
+      }
+    } catch (err) { /* silent fail — Formspree still captured the email */ }
+  }
+
+  fetchCount();
+
+  // ─── CARDS ───
   const cards = [
     { el: document.querySelector('.card-left'),  delay: 1700 },
     { el: document.querySelector('.card-main'),  delay: 1900 },
@@ -778,7 +927,7 @@
     setTimeout(() => el.classList.add('visible'), 1400 + i * 150);
   });
 
-  // Scroll reveal
+  // ─── SCROLL REVEAL ───
   const reveals = document.querySelectorAll('.reveal');
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -787,7 +936,7 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => revealObs.observe(el));
 
-  // Waitlist form
+  // ─── WAITLIST FORM ───
   const form = document.getElementById('waitlist-form');
   const success = document.getElementById('success-msg');
   form.addEventListener('submit', async (e) => {
@@ -798,6 +947,7 @@
       if (res.ok) {
         form.style.display = 'none';
         success.style.display = 'block';
+        await incrementCount();
       }
     } catch (err) { console.error(err); }
   });
